@@ -1,13 +1,14 @@
 <template>
-  <div class="home">
-    <span class="iconfont icon-footprint"></span>
-  </div>
+  <TopNav></TopNav>
+  <Swiper></Swiper>
 </template>
 
 <script>
+import TopNav from "@/components/home/TopNav.vue";
+import Swiper from "@/components/home/Swiper.vue";
 export default {
   name: "HomeView",
-  components: {},
+  components: { TopNav, Swiper },
 };
 </script>
 <style lang="less" scoped>
