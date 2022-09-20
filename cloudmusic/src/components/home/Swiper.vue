@@ -9,17 +9,16 @@
 </template>
 
 <script>
-import axios from "axios";
+import { reqGetBannerList } from "@/api/index";
 import { onMounted, reactive } from "vue";
 export default {
   setup() {
     const state = reactive({
       images: [],
     });
-    onMounted(() => {
-      axios.get("http://localhost:3000/banner?type=2").then((res) => {
-        state.images = res.data.banners;
-      });
+    onMounted(async () => {
+      const res = await reqGetBannerList();
+      state.images = res.data.banners;
     });
     return { state };
   },
@@ -34,7 +33,7 @@ export default {
   img {
     width: 7rem;
     height: 2.8rem;
-    border-radius: 0.1rem;
+    border-radius: 0.2rem;
   }
 }
 .van-swipe__indicators {
