@@ -1,6 +1,6 @@
 <template>
   <div id="swiper">
-    <van-swipe :autoplay="3000" lazy-render>
+    <van-swipe :autoplay="5000" lazy-render>
       <van-swipe-item v-for="image in state.images" :key="image">
         <img :src="image.pic" />
       </van-swipe-item>
@@ -9,7 +9,7 @@
 </template>
 
 <script>
-import { reqGetBannerList } from "@/api/index";
+import { reqGetBannerList } from "@/api/home";
 import { onMounted, reactive } from "vue";
 export default {
   setup() {
