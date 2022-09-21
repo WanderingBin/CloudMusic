@@ -1,9 +1,9 @@
 @font-face {
   font-family: "iconfont"; /* Project id 3659020 */
-  src: url('iconfont.woff2?t=1663673913308') format('woff2'),
-       url('iconfont.woff?t=1663673913308') format('woff'),
-       url('iconfont.ttf?t=1663673913308') format('truetype'),
-       url('iconfont.svg?t=1663673913308#iconfont') format('svg');
+  src: url('iconfont.woff2?t=1663758978856') format('woff2'),
+       url('iconfont.woff?t=1663758978856') format('woff'),
+       url('iconfont.ttf?t=1663758978856') format('truetype'),
+       url('iconfont.svg?t=1663758978856#iconfont') format('svg');
 }
 
 .iconfont {
@@ -12,6 +12,30 @@
   font-style: normal;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+}
+
+.icon-24gf-playlist:before {
+  content: "\ea82";
+}
+
+.icon-shipin:before {
+  content: "\e6bb";
+}
+
+.icon-shangbiao:before {
+  content: "\e610";
+}
+
+.icon-liebiao-dian:before {
+  content: "\e6b2";
+}
+
+.icon-24gl-playlistMusic3:before {
+  content: "\ea72";
+}
+
+.icon-xitongfanhui:before {
+  content: "\e6ac";
 }
 
 .icon-xingqiu:before {
