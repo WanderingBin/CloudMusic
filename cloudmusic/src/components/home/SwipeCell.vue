@@ -101,7 +101,7 @@ export default {};
   }
   hr {
     margin-top: 0.1rem;
-    color: #f8f8f8;
+    color: #dadcdb;
   }
 }
 </style>

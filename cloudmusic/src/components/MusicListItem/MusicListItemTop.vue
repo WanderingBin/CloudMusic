@@ -118,7 +118,7 @@ export default {
   }
   .body {
     width: 100%;
-    height: 4.5rem;
+    height: 5rem;
     margin-top: 0.1rem;
     .bodyhead {
       display: flex;
@@ -241,7 +241,7 @@ export default {
       }
     }
     .btns div:last-child {
-      background-color: #ff2559;
+      background: linear-gradient(90deg, #ff2657, #ff383d);
     }
   }
 }
