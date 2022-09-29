@@ -39,8 +39,11 @@
               <span class="iconfont icon-add">关注</span>
             </div>
           </div>
-          <div class="score">
-            <span>评分</span><span class="iconfont icon-right"></span>
+          <div class="score" v-if="playlist.algTags || playlist.score">
+            <span>{{
+              playlist.score ? playlist.score : playlist.algTags[0]
+            }}</span
+            ><span class="iconfont icon-right"></span>
           </div>
         </div>
       </div>
@@ -50,10 +53,20 @@
       <span class="namespan iconfont icon-right"></span>
       <div class="btns">
         <div>
-          <span class="iconfont icon-share"></span>{{ playlist.shareCount }}
+          <span class="iconfont icon-share"></span
+          >{{
+            playlist.shareCount > 10000
+              ? (playlist.shareCount / 10000).toFixed(1) + "万"
+              : playlist.shareCount
+          }}
         </div>
         <div>
-          <span class="iconfont icon-mark"></span>{{ playlist.commentCount }}
+          <span class="iconfont icon-mark"></span
+          >{{
+            playlist.commentCount > 10000
+              ? (playlist.commentCount / 10000).toFixed(1) + "万"
+              : playlist.commentCount
+          }}
         </div>
         <div>
           <span class="iconfont icon-favor"></span
@@ -96,11 +109,14 @@ export default {
 .musicItemTop {
   background-color: #707378;
   .top {
+    position: fixed;
+    top: 0;
     width: 100%;
     height: 0.8rem;
     line-height: 0.8rem;
     display: flex;
     justify-content: space-between;
+    background-color: #707378;
     color: #ffffff;
     .return {
       margin-left: 0.16rem;
@@ -119,7 +135,7 @@ export default {
   .body {
     width: 100%;
     height: 5rem;
-    margin-top: 0.1rem;
+    margin-top: 0.8rem;
     .bodyhead {
       display: flex;
       justify-content: space-around;
@@ -232,6 +248,7 @@ export default {
         border-radius: 0.5rem;
         background-color: rgba(186, 186, 186, 0.508);
         color: #ffffff;
+        margin-top: 0.3rem;
         span {
           font-size: 20px;
           margin-right: 0.1rem;

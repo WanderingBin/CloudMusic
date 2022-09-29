@@ -1,7 +1,16 @@
 <template>
   <router-view />
+  <BottomControls></BottomControls>
 </template>
-
+<script>
+import BottomControls from "./components/Global/BottomControls.vue";
+export default {
+  setup() {},
+  components: {
+    BottomControls,
+  },
+};
+</script>
 <style lang="less">
 * {
   margin: 0;

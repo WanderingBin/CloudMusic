@@ -29,7 +29,6 @@ export default {
       let res = await reqGetMusicListItem(id);
       data.playlist = res.data.playlist;
       sessionStorage.setItem("itemDetail", JSON.stringify(data));
-
       // 获取歌单歌曲
       let result = await reqGetMusicListSongs(id);
       data.songs = result.data.songs;

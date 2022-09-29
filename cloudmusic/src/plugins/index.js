@@ -1,7 +1,7 @@
-import { Swipe, SwipeItem,Button,SwipeCell } from 'vant';
+import { Swipe, SwipeItem,Button,SwipeCell,Popup } from 'vant';
 
 let vantComponents=[
-    Swipe, SwipeItem,Button,SwipeCell
+    Swipe, SwipeItem,Button,SwipeCell,Popup
 ]
 
 export default function getVant(app){

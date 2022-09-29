@@ -13,7 +13,7 @@
     <div class="playall">
       <span class="iconfont icon-video_fill_light"></span>
       <span>播放全部</span>
-      <span>（123）</span>
+      <span>（{{ length }}）</span>
     </div>
     <div class="musiclist">
       <span class="iconfont icon-down"></span>
@@ -23,7 +23,7 @@
   <div class="songslist">
     <div class="song" v-for="(item, index) in songs" :key="item.id">
       <div class="id">{{ index + 1 }}</div>
-      <div class="songname">
+      <div class="songname" @click="playMusic(item, index)">
         <p>{{ item.name }}</p>
         <div>
           <span class="quality" v-show="item.sq != null">SQ</span>
@@ -41,16 +41,43 @@
 </template>
 
 <script>
+import { reactive } from "@vue/reactivity";
+import { nextTick } from "vue";
+import { mapMutations, mapState } from "vuex";
 export default {
   props: ["songs"],
-  setup(songs) {
-    console.log(songs);
+  setup(props) {
+    const data = reactive({
+      songs: "",
+    });
+    return { data };
+  },
+  methods: {
+    ...mapState(["playlist", "playlistIndex"]),
+    ...mapMutations([
+      "updateIsBtnShow",
+      "updatePlaylist",
+      "updatePlaylistIndex",
+      "updateAr",
+    ]),
+    playMusic: function (item, index) {
+      this.updatePlaylist(this.songs);
+      this.updatePlaylistIndex(index);
+      this.updateIsBtnShow(false);
+      this.$store.dispatch("getLyric", item.id);
+    },
+  },
+  computed: {
+    length() {
+      return this.songs.length;
+    },
   },
 };
 </script>
 
 <style lang="less" scoped>
 .vipsongs {
+  width: 100%;
   height: 1rem;
   line-height: 1rem;
   display: flex;
@@ -83,11 +110,14 @@ export default {
   }
 }
 .controls {
+  position: sticky;
+  top: 0.8rem;
   height: 0.8rem;
   display: flex;
   justify-content: space-between;
   align-items: center;
-  margin: 0 0.2rem;
+  padding: 0 0.2rem;
+  background-color: #fff;
   .playall span:first-child {
     font-size: 0.6rem;
     color: #fe4a3b;
@@ -103,6 +133,8 @@ export default {
   }
 }
 .songslist {
+  padding-bottom: 1rem;
+
   .song {
     display: flex;
     justify-content: space-around;

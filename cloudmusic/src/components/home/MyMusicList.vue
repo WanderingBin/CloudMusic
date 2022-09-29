@@ -4,15 +4,17 @@
     <template #swipeList>
       <van-swipe :loop="false" :width="115">
         <van-swipe-item v-for="item in data.musicList" :key="item.id">
-          <div class="content">
-            <span class="videoSpan">
-              <img :src="item.picUrl" alt="" />
-              <span class="iconfont icon-playfill">{{
-                playCount(item.playCount)
-              }}</span>
-            </span>
-            <p>{{ item.name }}</p>
-          </div>
+          <router-link :to="{ path: '/musiclistitem', query: { id: item.id } }">
+            <div class="content">
+              <span class="videoSpan">
+                <img :src="item.picUrl" alt="" />
+                <span class="iconfont icon-playfill">{{
+                  playCount(item.playCount)
+                }}</span>
+              </span>
+              <p>{{ item.name }}</p>
+            </div>
+          </router-link>
         </van-swipe-item>
       </van-swipe>
     </template>
