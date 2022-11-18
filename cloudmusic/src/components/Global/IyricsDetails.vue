@@ -41,7 +41,7 @@
           :key="index"
           :class="{
             active:
-              currentTime * 1000 >= item.time && currentTime * 1000 < item.pre,
+              currentTime * 1000 >= item.time && currentTime * 1000 <= item.pre,
           }"
           @click="isLyricShow = false"
         >
@@ -69,7 +69,6 @@
         :max="duration"
         ref="range"
         v-model="currentTime"
-        step="0.01"
       />
       <span>{{ durationSec }}</span>
     </div>
@@ -110,6 +109,7 @@ export default {
   },
   mounted() {
     this.addDuration();
+    this.updateTime();
   },
   methods: {
     ...mapMutations([
@@ -147,13 +147,17 @@ export default {
           let sec = item.slice(4, 6);
           let mill = item.slice(7, 10);
           let lrc = item.slice(11, item.length);
+          if (isNaN(Number(mill))) {
+            mill = item.slice(7, 9);
+            lrc = item.slice(10, item.length);
+          }
           let time =
             parseInt(min) * 60 * 1000 + parseInt(sec) * 1000 + parseInt(mill);
           return { min, sec, mill, lrc, time };
         });
         arr.forEach((item, i) => {
           if (i === arr.length - 1 || isNaN(arr[i + 1].time)) {
-            item.pre = 1000;
+            item.pre = 100000;
           } else {
             item.pre = arr[i + 1].time;
           }
@@ -185,8 +189,10 @@ export default {
   watch: {
     currentTime: function (newValue) {
       let p = document.querySelector(".active");
-      if (p && p.offsetTop > 200) {
+      if (p && this.$refs.lyricList && p.offsetTop > 200) {
         this.$refs.lyricList.scrollTop = p.offsetTop - 200;
+      } else {
+        this.$refs.lyricList.scrollTop = -50;
       }
       this.$refs.range.style.cssText = `background-size:${
         (this.currentTime / this.duration) * 100
@@ -250,7 +256,7 @@ export default {
 }
 .detailContent {
   width: 100%;
-  height: 9rem;
+  height: 11.8rem;
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -266,6 +272,7 @@ export default {
     scroll-behavior: smooth;
     p {
       text-align: center;
+      font-size: 0.32rem;
       color: rgba(255, 255, 255, 0.701);
       span {
         height: 0.8rem;
@@ -278,34 +285,37 @@ export default {
     }
   }
   .needle_ab {
-    width: 2rem;
-    height: 3rem;
+    width: 2.5rem;
+    height: 4rem;
     margin-left: 1rem;
     position: absolute;
-    transform: rotate(-5deg);
+    transform: rotate(-9deg);
     transform-origin: left top;
     transition: all 2s;
   }
   .needle_ab_active {
-    width: 2rem;
-    height: 3rem;
+    width: 2.5rem;
+    height: 4rem;
     margin-left: 1rem;
     position: absolute;
-    transform: rotate(7deg);
+    transform: rotate(3deg);
     transform-origin: left top;
     transition: all 1s;
   }
   .cd {
-    padding-top: 2rem;
+    width: 5rem;
+    height: 5rem;
+    padding-top: 3rem;
     position: absolute;
-    right: 1.8rem;
+    right: 1.1rem;
     z-index: -1;
   }
   .picUrl {
-    width: 2.5rem;
-    height: 2.5rem;
+    width: 3.2rem;
+    height: 3.2rem;
     border-radius: 50%;
-    margin-top: 2.75rem;
+    margin-top: 3.9rem;
+    margin-left: 0.4rem;
     animation: picUrl_rotate 10s linear infinite;
   }
   .picUrl_active {
@@ -361,7 +371,7 @@ export default {
       height: 10px;
       width: 10px;
       border-radius: 50%;
-      background: #ffffff;
+      background: #d2bdbd;
     }
   }
 

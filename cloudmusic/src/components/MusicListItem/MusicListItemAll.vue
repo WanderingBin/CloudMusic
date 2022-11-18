@@ -42,7 +42,6 @@
 
 <script>
 import { reactive } from "@vue/reactivity";
-import { nextTick } from "vue";
 import { mapMutations, mapState } from "vuex";
 export default {
   props: ["songs"],
@@ -82,7 +81,7 @@ export default {
   line-height: 1rem;
   display: flex;
   background-color: #ebebeb;
-  transform: translateY(-0.1rem);
+  transform: translateY(-0.15rem);
   border-radius: 0.2rem 0.2rem 0 0;
   justify-content: space-between;
   border-bottom: 1px solid #dadcdb;
@@ -137,12 +136,13 @@ export default {
 
   .song {
     display: flex;
-    justify-content: space-around;
+    justify-content: space-between;
     height: 1rem;
     align-items: center;
     .id {
       font-size: 12px;
       color: #999;
+      margin-left: 0.2rem;
     }
     .songname {
       width: 4.5rem;
@@ -166,6 +166,15 @@ export default {
       div span {
         font-size: 0.24rem;
         color: #999;
+      }
+      div span::after {
+        content: "/";
+      }
+      div span:last-child::after {
+        content: "";
+      }
+      div span:first-child::after {
+        content: "";
       }
     }
     .more {

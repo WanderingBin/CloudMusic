@@ -7,7 +7,7 @@
         <span>歌单</span>
         <span class="iconfont icon-shangbiao"></span>
       </div>
-      <div class="search">
+      <div class="searchIcon">
         <span class="iconfont icon-search"></span>
         <span class="iconfont icon-liebiao-dian"></span>
       </div>
@@ -118,6 +118,7 @@ export default {
     justify-content: space-between;
     background-color: #707378;
     color: #ffffff;
+    z-index: 1;
     .return {
       margin-left: 0.16rem;
     }
@@ -128,7 +129,7 @@ export default {
       font-size: 0.2rem;
       vertical-align: top;
     }
-    .search span {
+    .searchIcon span {
       margin: 0 0.3rem;
     }
   }

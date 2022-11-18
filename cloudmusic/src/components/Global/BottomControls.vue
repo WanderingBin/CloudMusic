@@ -1,5 +1,5 @@
   <template>
-  <div class="bottomControls">
+  <div class="bottomControls" v-if="isFooterShow">
     <div class="songImg">
       <img
         :src="playlist[playlistIndex].al.picUrl"
@@ -54,6 +54,7 @@ export default {
       "arIndex",
       "isbtnshow",
       "detailShow",
+      "isFooterShow",
     ]),
   },
   data() {
@@ -63,7 +64,6 @@ export default {
   },
   mounted() {
     this.$store.dispatch("getLyric", this.playlist[this.playlistIndex].id);
-    this.updateTime();
   },
   update() {
     this.addDuration();
@@ -96,7 +96,7 @@ export default {
     updateTime() {
       this.timer = setInterval(() => {
         this.updateCurrentTime(this.$refs.audio.currentTime);
-      }, 20);
+      }, 50);
     },
     //添加总时长
     addDuration() {
@@ -111,6 +111,10 @@ export default {
       }
     },
     playlistIndex: function () {
+      if (!this.isbtnshow) {
+        this.$refs.audio.autoplay = true;
+        this.updateIsBtnShow(false);
+      }
       this.$store.dispatch("getLyric", this.playlist[this.playlistIndex].id);
     },
   },
